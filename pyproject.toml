@@ -1,0 +1,4 @@
+[tool.black]
+# Collections fit on one line, or take one item per line.
+line-length = 110
+skip-magic-trailing-comma = true

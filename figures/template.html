@@ -1,0 +1,342 @@
+<title>Collapsing Pyramids Figures</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column of figure plates; each plate = headline + hero number, then a full-bleed chart drawn with gradients, pills and soft grids. */
+:root{
+  --bg:#f4f5f7; --plate:#ffffff; --ink:#1f2328; --ink2:#50565f; --ink3:#8c929b; --rule:#e5e7eb; --grid:#d9dce1;
+  --human:#24405f; --human2:#5f7c9b; --humanTint:#e5eaf0; --junior:#72aed0; --junior2:#a3cbe3; --juniorInk:#2e6d93;
+  --loss:#c4525a; --loss2:#d98c91; --lossTint:#f5e4e5;
+  --ai:#c8ccd2; --ai2:#e8eaed; --aiInk:#7d848e; --shadow:rgba(31,35,40,.08);
+  --serif:"Newsreader",Georgia,"Times New Roman",serif; --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111317; --plate:#1a1d23; --ink:#eceef1; --ink2:#b4b9c1; --ink3:#7b818b; --rule:#2a2e36; --grid:#2f343d;
+  --human:#8199b8; --human2:#a3b6cd; --humanTint:#1f2835; --junior:#7cb6d8; --junior2:#a3cbe3; --juniorInk:#7cb6d8;
+  --loss:#d9686f; --loss2:#e49a9e; --lossTint:#382326;
+  --ai:#555a62; --ai2:#2b2e34; --aiInk:#9ca3ad; --shadow:rgba(0,0,0,.4); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111317; --plate:#1a1d23; --ink:#eceef1; --ink2:#b4b9c1; --ink3:#7b818b; --rule:#2a2e36; --grid:#2f343d;
+  --human:#8199b8; --human2:#a3b6cd; --humanTint:#1f2835; --junior:#7cb6d8; --junior2:#a3cbe3; --juniorInk:#7cb6d8;
+  --loss:#d9686f; --loss2:#e49a9e; --lossTint:#382326;
+  --ai:#555a62; --ai2:#2b2e34; --aiInk:#9ca3ad; --shadow:rgba(0,0,0,.4); color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;position:relative;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 72px}
+.wrap{max-width:920px;margin:0 auto;display:grid;gap:32px}
+header.top{display:grid;gap:10px;padding:0 4px 8px}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+header.top h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,6vw,56px);line-height:1.02;margin:0;letter-spacing:-.02em;text-wrap:balance;max-width:20ch}
+header.top p{margin:0;color:var(--ink2);max-width:60ch;font-size:16px}
+figure.plate{margin:0;background:var(--plate);border-radius:18px;padding:36px 40px 24px;display:grid;gap:18px;min-width:0;box-shadow:0 1px 2px var(--shadow),0 12px 40px -18px var(--shadow)}
+.head{display:grid;grid-template-columns:1fr auto;gap:8px 32px;align-items:end}
+.head > div{min-width:0;display:grid;gap:8px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+figure h2{font-family:var(--serif);font-weight:500;font-size:clamp(23px,3.4vw,32px);line-height:1.12;margin:0;letter-spacing:-.012em;text-wrap:balance;max-width:24ch}
+.dek{margin:0;color:var(--ink2);font-size:14.5px;max-width:62ch}
+.stat{text-align:right;display:grid;gap:2px;justify-items:end}
+.stat b{font-family:var(--serif);font-weight:500;font-size:clamp(44px,7vw,72px);line-height:.9;letter-spacing:-.03em}
+.stat span{font-size:12.5px;color:var(--ink2);max-width:18ch;text-align:right}
+.chart{position:relative;min-width:0}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+figcaption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--ink3);padding-top:4px}
+svg text{font-family:var(--sans);fill:var(--ink2)}
+.ax{font-family:var(--mono);font-size:11px;fill:var(--ink3)}
+.lab{font-size:13px;font-weight:600}
+.note{font-size:12px;fill:var(--ink2)}
+.pill text{font-size:12px;font-weight:600;fill:#fff}
+.tip{position:absolute;pointer-events:none;background:var(--plate);border-radius:10px;padding:10px 12px;font-size:12.5px;min-width:160px;opacity:0;transition:opacity .12s;z-index:5;
+  box-shadow:0 2px 6px var(--shadow),0 14px 30px -10px var(--shadow)}
+.tip .y{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-bottom:6px}
+.tip .r{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums;line-height:1.7}
+.tip .r i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px}
+/* pyramid controls */
+.pyr{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:center}
+.panel{display:grid;gap:18px}
+.panel .yr{font-family:var(--serif);font-size:64px;line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.meter{display:grid;gap:6px}
+.meter .t{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2)}
+.meter .t b{font-family:var(--mono);font-weight:500;color:var(--ink);font-size:14px}
+.meter .bar{height:8px;border-radius:8px;background:var(--ai2);overflow:hidden}
+.meter .bar i{display:block;height:100%;border-radius:8px;transition:width .25s}
+.ctrl{display:flex;align-items:center;gap:12px}
+.ctrl button{all:unset;cursor:pointer;width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--plate);display:grid;place-items:center;flex:none}
+.ctrl button:focus-visible{outline:2px solid var(--human);outline-offset:3px}
+.ctrl input{flex:1;accent-color:var(--human);min-width:0}
+.swatches{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink2)}
+.swatches span{display:inline-flex;align-items:center;gap:7px}
+.swatches i{width:11px;height:11px;border-radius:3px}
+body.export{background:#fff;padding:0}body.export .wrap{gap:0;max-width:none}body.export header.top,body.export .head,body.export figcaption{display:none}body.export figure.plate{box-shadow:none;border-radius:0;padding:12px 20px}body.export svg .ax{font-size:14.5px}body.export svg .note{font-size:15px}body.export svg .lab{font-size:16px}body.export .pill text{font-size:14.5px}body.export .swatches{font-size:15px}
+@media (max-width:640px){figure.plate{padding:24px 18px 18px;border-radius:14px}.head{grid-template-columns:1fr}.stat{justify-items:start;text-align:left}.stat span{text-align:left}.pyr{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="kick">Collapsing pyramids · figures</div>
+  <h1>How AI takes a profession from its base</h1>
+  <p>The essay's figures, redrawn. Every curve comes from the reference simulation of the model, 2026 to 2050. Hover a chart to read its values.</p>
+</header>
+
+<figure class="plate">
+  <div class="head"><div><div class="eyebrow">Figure 1 · The pyramid of a profession</div>
+  <h2>AI enters a profession through the floor where juniors learn</h2></div></div>
+  <div class="swatches"><span><i style="background:var(--junior)"></i>junior band, still human</span><span><i style="background:var(--human)"></i>other human tasks</span><span><i style="background:var(--ai)"></i>done by AI</span></div>
+  <div class="chart" id="c1"></div>
+  <figcaption><span>Software development, reference scenario. Each floor is a level of task complexity.</span><span>Model simulation</span></figcaption>
+</figure>
+
+<figure class="plate">
+  <div class="head"><div><div class="eyebrow">Figure 2 · The fold</div>
+  <h2>A profession folds after losing less than a tenth of its jobs</h2>
+  <p class="dek">Know-how survives only while enough of the junior band stays open for seniors to train.</p></div>
+  <div class="stat"><b style="color:var(--loss)">9%</b><span>of jobs lost when the base folds</span></div></div>
+  <div class="chart" id="c2"></div>
+  <figcaption><span>Junior band = 15% of a profession's jobs; fold at 40% of it open.</span><span>Model</span></figcaption>
+</figure>
+
+<figure class="plate">
+  <div class="head"><div><div class="eyebrow">Figure 3 · Invention</div>
+  <h2>By 2050 the economy invents new tasks at less than half its 2026 speed</h2>
+  <p class="dek">New tasks are invented by people who master the old ones. As expertise erodes, invention slows with it.</p></div>
+  <div class="stat"><b style="color:var(--human)">0.46</b><span>speed of invention in 2050, 2026 = 1</span></div></div>
+  <div class="chart" id="c3"></div>
+  <figcaption><span>Index, 2026 = 1. Shaded band: from no self-teaching to an AI tutor.</span><span>Model simulation</span></figcaption>
+</figure>
+
+<figure class="plate">
+  <div class="head"><div><div class="eyebrow">Figure 4 · Two ways of using AI</div>
+  <h2>The same tool sharpens a third of the workforce and blunts the rest</h2>
+  <p class="dek">Those who use AI as a tool gain skill; those who use it instead of thinking lose it. The average falls, because the second group is larger.</p></div></div>
+  <div class="chart" id="c4"></div>
+  <figcaption><span>Cognitive skill, 2026 = 1.</span><span>Model simulation</span></figcaption>
+</figure>
+
+<figure class="plate">
+  <div class="head"><div><div class="eyebrow">Figure 5 · The price of the remedy</div>
+  <h2>Learning better with AI makes the remedy cheaper</h2>
+  <p class="dek">To save a profession, a policy must reopen part of its junior band. The weaker average skill gets, the larger that part has to be.</p></div>
+  <div class="stat"><b style="color:var(--human)">−19</b><span>points of junior band to restore in 2050</span></div></div>
+  <div class="chart" id="c5"></div>
+  <figcaption><span>Share of the junior band a policy must restore.</span><span>Model simulation</span></figcaption>
+</figure>
+
+<figure class="plate">
+  <div class="head"><div><div class="eyebrow">Figure 6 · Sales, floor by floor</div>
+  <h2>The floors where junior salespeople learned are already automated</h2>
+  <p class="dek">A salesperson who watches only the top floor will think the job is safe.</p></div></div>
+  <div class="chart" id="c6"></div>
+  <figcaption><span>Illustrative: a plausible sequence, not a measurement.</span><span></span></figcaption>
+</figure>
+
+<figure class="plate">
+  <div class="head"><div><div class="eyebrow">Figure 8 · The cost of waiting</div>
+  <h2>Each year of delay costs more than the one before</h2>
+  <p class="dek">Output produced but not sold before a policy restores demand, in years of 2026 output. Even with no delay, myopia sets the policy at the end of 2030.</p></div>
+  <div class="stat"><b style="color:var(--loss)">×17</b><span>more output lost with a 15-year delay</span></div></div>
+  <div class="chart" id="c7"></div>
+  <figcaption><span>Output actually sold without policy, 2026 = 1.</span><span>Model simulation</span></figcaption>
+</figure>
+</div>
+<div class="tip" id="tip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+const D = __DATA__;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const tip = document.getElementById('tip'), W = 860;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let uid = 0;
+function svgIn(id, h, w = W){ const el = d3.select('#' + id); el.selectAll('*').remove();
+  return el.append('svg').attr('viewBox', `0 0 ${w} ${h}`).attr('role','img'); }
+function grad(svg, color, a0 = .32, a1 = 0, vertical = true){ const id = 'g' + (uid++);
+  const g = svg.select('defs').empty() ? svg.append('defs') : svg.select('defs');
+  const lg = g.append('linearGradient').attr('id', id).attr('x1',0).attr('y1',0).attr('x2', vertical?0:1).attr('y2', vertical?1:0);
+  lg.append('stop').attr('offset','0%').attr('stop-color', color).attr('stop-opacity', a0*.6);
+  lg.append('stop').attr('offset','100%').attr('stop-color', color).attr('stop-opacity', a1*.6); return `url(#${id})`; }
+function hatch(svg, color){ const id = 'h' + (uid++); const g = svg.select('defs').empty() ? svg.append('defs') : svg.select('defs');
+  const p = g.append('pattern').attr('id', id).attr('width', 7).attr('height', 7).attr('patternUnits','userSpaceOnUse').attr('patternTransform','rotate(45)');
+  p.append('line').attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',7).attr('stroke', color).attr('stroke-width', 2.2).attr('stroke-opacity', .5); return `url(#${id})`; }
+function pill(g, x, y, text, color, anchor = 'start'){
+  const gg = g.append('g').attr('class','pill'); const yel = false; const t = gg.append('text').style('fill', yel ? '#2b2410' : '#fff').attr('y', y).attr('dominant-baseline','central').text(text);
+  const w = t.node().getComputedTextLength() + 18, x0 = anchor === 'start' ? x : anchor === 'end' ? x - w : x - w/2;
+  t.attr('x', x0 + 9); gg.insert('rect','text').attr('x', x0).attr('y', y - 11.5).attr('width', w).attr('height', 23).attr('rx', 11.5).attr('fill', color); return gg; }
+function dot(g, x, y, color){   g.append('circle').attr('cx',x).attr('cy',y).attr('r',5).attr('fill',color).attr('stroke',css('--plate')).attr('stroke-width',2); }
+function showTip(chartEl, x, y, html){ const r = chartEl.getBoundingClientRect(), p = document.body.getBoundingClientRect();
+  tip.innerHTML = html; tip.style.opacity = 1; const tw = tip.offsetWidth;
+  let left = r.left - p.left + x + 16; if (x + tw + 40 > r.width) left = r.left - p.left + x - tw - 16;
+  tip.style.left = left + 'px'; tip.style.top = (r.top - p.top + y) + 'px'; }
+const hideTip = () => tip.style.opacity = 0;
+const yr = i => { const t = D.t[i]; return Number.isInteger(t) ? t : `mid-${Math.floor(t)}`; };
+
+/* line chart over 2026–2050 */
+function timeChart(id, o){
+  const h = o.h || 380, m = Object.assign({t:24,r:150,b:34,l:12}, o.m || {}), svg = svgIn(id, h), iw = W-m.l-m.r, ih = h-m.t-m.b;
+  svg.append('defs');
+  const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+  const x = d3.scaleLinear([2026,2050],[0,iw]), y = d3.scaleLinear(o.y,[ih,0]);
+  o.yt.forEach(v => { g.append('line').attr('x1',0).attr('x2',iw).attr('y1',y(v)).attr('y2',y(v)).attr('stroke',css('--grid')).attr('stroke-dasharray','1 5').attr('stroke-linecap','round').attr('stroke-width',1.4);
+    g.append('text').attr('class','ax').attr('x',0).attr('y',y(v)-7).text(o.yfmt(v)); });
+  [2026,2030,2035,2040,2045,2050].forEach(v => g.append('text').attr('class','ax').attr('x',x(v)).attr('y',ih+24).attr('text-anchor', v===2026?'start':v===2050?'end':'middle').text(v));
+  const line = arr => d3.line().x((d,i)=>x(D.t[i])).y(d=>y(d)).curve(d3.curveCatmullRom.alpha(.5))(arr);
+  const area = (a,b) => d3.area().x((d,i)=>x(D.t[i])).y0((d,i)=>y(typeof b==='number'?b:b[i])).y1((d,i)=>y(a[i])).curve(d3.curveCatmullRom.alpha(.5))(D.t);
+  const ctx = {g, svg, x, y, iw, ih, line, area};
+  if (o.under) o.under(ctx);
+  o.series.forEach(s => { const p = g.append('path').attr('d', line(D[s.k])).attr('fill','none').attr('stroke', css(s.c)).attr('stroke-width', s.w || 3)
+    .attr('stroke-linecap','round').attr('stroke-dasharray', s.dash || null).attr('opacity', s.op || 1);
+    if (!reduce && !s.dash){ const L = p.node().getTotalLength(); p.attr('stroke-dasharray', `${L} ${L}`).attr('stroke-dashoffset', 0); } });
+  o.series.filter(s => s.end).forEach(s => dot(g, x(2050), y(D[s.k].at(-1)), css(s.c)));
+  const ends = o.series.filter(s => s.label).map(s => ({s, y: y(D[s.k].at(-1))})).sort((a,b)=>a.y-b.y);
+  for (let i=1;i<ends.length;i++) if (ends[i].y-ends[i-1].y<48) ends[i].y = ends[i-1].y+48;
+  ends.forEach(({s,y:yy}) => { pill(g, iw+18, yy-7, s.pill || D[s.k].at(-1).toFixed(2), css(s.c));
+    g.append('text').attr('class','note').attr('x', iw+18).attr('y', yy+20).text(s.label); });
+  if (o.over) o.over(ctx);
+  const ch = g.append('line').attr('y1',0).attr('y2',ih).attr('stroke',css('--ink3')).attr('stroke-width',1).attr('opacity',0);
+  const dots = o.series.map(s => g.append('circle').attr('r',5).attr('fill',css(s.c)).attr('stroke',css('--plate')).attr('stroke-width',2.5).attr('opacity',0));
+  const el = document.getElementById(id);
+  g.append('rect').attr('width',iw).attr('height',ih).attr('fill','transparent')
+    .on('pointermove', function(ev){ const [mx] = d3.pointer(ev,this); const i = Math.max(0, Math.min(D.t.length-1, Math.round((x.invert(mx)-2026)*2)));
+      const xx = x(D.t[i]); ch.attr('x1',xx).attr('x2',xx).attr('opacity',.45);
+      o.series.forEach((s,k) => dots[k].attr('cx',xx).attr('cy',y(D[s.k][i])).attr('opacity',1));
+      const sc = el.getBoundingClientRect().width / W;
+      showTip(el, (xx+m.l)*sc, m.t*sc, `<div class="y">${yr(i)}</div>` + o.rows.map(r => `<div class="r"><span><i style="background:${css(r.c)}"></i>${r.n}</span><b>${r.f(D[r.k][i])}</b></div>`).join('')); })
+    .on('pointerleave', () => { ch.attr('opacity',0); dots.forEach(d=>d.attr('opacity',0)); hideTip(); });
+  return ctx;
+}
+
+/* ---------- Figure 1: three snapshots of the pyramid ---------- */
+function drawPyramid(){
+  const h = 440, svg = svgIn('c1', h); svg.append('defs');
+  const H = 10, ELL = D.ELL, pw = W/3, base = h - 20, top = 128, fh = (base - top)/H, wMax = pw - 44, gap = 3;
+  const hg = (c1, c2) => { const id='pg'+(uid++); const lg = svg.select('defs').append('linearGradient').attr('id',id).attr('x1',0).attr('x2',1);
+    lg.append('stop').attr('offset','0%').attr('stop-color',c1); lg.append('stop').attr('offset','50%').attr('stop-color',c1); lg.append('stop').attr('offset','100%').attr('stop-color',c1); return `url(#${id})`; };
+  const humanG = hg(css('--human'), css('--human2')), juniorG = hg(css('--junior'), css('--junior2')), hat = hatch(svg, css('--aiInk'));
+  [0, 4, 18].forEach((idx, k) => {
+    const p = D.pyrT[idx], g = svg.append('g').attr('transform', `translate(${k*pw},0)`), cx = pw/2;
+    const halfW = yy => wMax/2 * Math.exp(-yy/ELL);
+    const trap = (y0, y1) => { const a = halfW(y0), b = halfW(y1); return `M${cx-a},${base-y0*fh}L${cx+a},${base-y0*fh}L${cx+b},${base-y1*fh}L${cx-b},${base-y1*fh}Z`; };
+    g.append('text').attr('x', 22).attr('y', 38).style('font-family','var(--serif)').style('font-size','34px').style('fill',css('--ink')).text(D.t[idx]);
+    const meter = (yy, label, v, col) => { g.append('text').attr('class','note').attr('x',22).attr('y',yy).text(label);
+      g.append('text').attr('class','ax').attr('x',pw-22).attr('y',yy).attr('text-anchor','end').style('fill',css('--ink')).style('font-size','12px').text(Math.round(v*100)+'%');
+      g.append('rect').attr('x',22).attr('y',yy+7).attr('width',pw-44).attr('height',6).attr('rx',3).attr('fill',css('--ai2'));
+      g.append('rect').attr('x',22).attr('y',yy+7).attr('width',Math.max(6,(pw-44)*v)).attr('height',6).attr('rx',3).attr('fill',css(col)); };
+    meter(66, 'jobs done by AI', p.lost, '--aiInk'); meter(98, 'junior band still open', p.q, '--junior');
+    for (let f = 0; f < H; f++){
+      const y0 = f + (f ? gap/fh/2 : 0), y1 = f + 1 - gap/fh/2, cut = Math.min(Math.max(p.g, y0), y1);
+      if (cut > y0){ g.append('path').attr('d', trap(y0, cut)).attr('fill', css('--ai2')); g.append('path').attr('d', trap(y0, cut)).attr('fill', hat); }
+      if (cut < y1) g.append('path').attr('d', trap(cut, y1)).attr('fill', f === 0 ? juniorG : humanG);
+    }
+    if (p.g > .3 && p.g < H){ const yy = base - p.g*fh, a = halfW(p.g) + 8;
+      g.append('line').attr('x1', cx-a).attr('x2', cx+a).attr('y1', yy).attr('y2', yy).attr('stroke', css('--ink')).attr('stroke-width', 1.6).attr('stroke-dasharray','5 4');
+      pill(g, cx + a - 6, yy - 16, 'AI frontier', css('--ink'), 'end'); }
+  });
+}
+
+function draw(){
+drawPyramid();
+
+/* ---------- Figure 2: the fold ---------- */
+{ const h = 360, m = {t:26,r:24,b:40,l:12}, svg = svgIn('c2', h); svg.append('defs');
+  const iw = W-m.l-m.r, ih = h-m.t-m.b, g = svg.append('g').attr('transform',`translate(${m.l},${m.t})`);
+  const x = d3.scaleLinear([0,.2],[0,iw]), y = d3.scaleLinear([0,1],[ih,0]);
+  g.append('rect').attr('x',0).attr('y',y(.4)).attr('width',iw).attr('height',ih-y(.4)).attr('fill',css('--lossTint')).attr('rx',6);
+  g.append('rect').attr('x',0).attr('y',y(.4)).attr('width',iw).attr('height',ih-y(.4)).attr('fill',hatch(svg, css('--loss'))).attr('opacity',.35).attr('rx',6);
+  [0,.4,1].forEach(v => { g.append('line').attr('x1',0).attr('x2',iw).attr('y1',y(v)).attr('y2',y(v)).attr('stroke',css('--grid')).attr('stroke-dasharray','1 5').attr('stroke-linecap','round').attr('stroke-width',1.4);
+    g.append('text').attr('class','ax').attr('x',0).attr('y',y(v)-7).text(Math.round(v*100)+'%' + (v===1?'  junior band still open':'')); });
+  [0,.05,.1,.15,.2].forEach(v => g.append('text').attr('class','ax').attr('x',x(v)).attr('y',ih+24).attr('text-anchor',v===0?'start':v===.2?'end':'middle').text(Math.round(v*100)+'%'));
+  g.append('text').attr('class','ax').attr('x',iw).attr('y',ih+24).attr('dy',14).attr('text-anchor','end').text('');
+  const pts = d3.range(0,.2001,.001).map(p => [p, Math.max(0,1-p/.15)]);
+  g.append('path').attr('d', d3.area().x(d=>x(d[0])).y0(ih).y1(d=>y(d[1]))(pts)).attr('fill', grad(svg, css('--human'), .28, 0));
+  g.append('path').attr('d', d3.line().x(d=>x(d[0])).y(d=>y(d[1]))(pts)).attr('fill','none').attr('stroke',css('--human')).attr('stroke-width',3.2).attr('stroke-linecap','round');
+  g.append('line').attr('x1',0).attr('x2',iw).attr('y1',y(.4)).attr('y2',y(.4)).attr('stroke',css('--loss')).attr('stroke-width',1.6).attr('stroke-dasharray','6 5');
+  g.append('text').attr('x',iw-14).attr('y',y(.4)+26).attr('text-anchor','end').attr('class','lab').style('fill',css('--loss')).text('Below the fold, know-how erodes');
+  g.append('text').attr('x',iw-14).attr('y',y(.4)-14).attr('text-anchor','end').attr('class','note').text('transmission still possible');
+  dot(g, x(.09), y(.4), css('--loss')); pill(g, x(.09)+18, y(.4)-30, '9% lost · the base folds', css('--loss'));
+  dot(g, x(.15), y(0), css('--ink')); pill(g, x(.15)+18, y(0)-26, '15% lost · no entry door left', css('--ink'));
+  g.append('text').attr('class','ax').attr('x',iw).attr('y',ih+38).attr('text-anchor','end').text("share of the profession's jobs lost →");
+  const el = document.getElementById('c2'), hl = g.append('circle').attr('r',5).attr('fill',css('--human')).attr('stroke',css('--plate')).attr('stroke-width',2.5).attr('opacity',0);
+  g.append('rect').attr('width',iw).attr('height',ih).attr('fill','transparent').on('pointermove',function(ev){ const [mx]=d3.pointer(ev,this); const p=Math.max(0,Math.min(.2,x.invert(mx))), q=Math.max(0,1-p/.15);
+    hl.attr('cx',x(p)).attr('cy',y(q)).attr('opacity',1); const sc=el.getBoundingClientRect().width/W;
+    showTip(el,(x(p)+m.l)*sc,(y(q)+m.t)*sc-20,`<div class="r"><span>jobs lost</span><b>${(p*100).toFixed(1)}%</b></div><div class="r"><span>junior band open</span><b>${Math.round(q*100)}%</b></div>`); })
+    .on('pointerleave',()=>{hl.attr('opacity',0);hideTip();});
+}
+
+/* ---------- Figure 3: invention ---------- */
+timeChart('c3', {y:[0,1.06], yt:[0,.25,.5,.75,1], yfmt:v=>v===1?'1 = 2026':v,
+  series:[{k:'Q',c:'--loss',w:2.4,label:'qualified employment',end:1},{k:'K',c:'--junior',w:2.4,label:'average expertise',end:1},{k:'inv',c:'--human',w:3.6,label:'speed of invention',end:1}],
+  under:({g,svg,x,y,area,iw}) => { g.append('path').attr('d', area(D.invT, D.inv0)).attr('fill', css('--humanTint'));
+    g.append('path').attr('d', area(D.inv, 0)).attr('fill', grad(svg, css('--human'), .22, 0));
+    g.append('line').attr('x1',0).attr('x2',iw).attr('y1',y(D.floor)).attr('y2',y(D.floor)).attr('stroke',css('--ink3')).attr('stroke-dasharray','6 5');
+    g.append('text').attr('class','note').attr('x',8).attr('y',y(D.floor)+18).text('floor sustained by the self-taught alone'); },
+  over:({g,x,y}) => [2030,2035,2040].forEach(v => { const val = D.inv[(v-2026)*2]; dot(g, x(v), y(val), css('--human')); pill(g, x(v), y(val)+30, val.toFixed(2), css('--human'), 'middle'); }),
+  rows:[{k:'inv',n:'invention',c:'--human',f:v=>v.toFixed(2)},{k:'K',n:'expertise',c:'--junior',f:v=>v.toFixed(2)},{k:'Q',n:'qualified jobs',c:'--loss',f:v=>v.toFixed(2)}]});
+
+/* ---------- Figure 4: polarisation ---------- */
+timeChart('c4', {h:360, y:[.6,1.38], yt:[.7,1,1.3], yfmt:v=>v===1?'1 = 2026':v,
+  series:[{k:'sH',c:'--human',w:3.4,label:'augmented, 30%',end:1},{k:'s',c:'--ink3',w:2,dash:'6 5',label:'average',end:1},{k:'sL',c:'--loss',w:3.4,label:'substituted, 70%',end:1}],
+  under:({g,svg,area}) => { g.append('path').attr('d', area(D.sH, 1)).attr('fill', grad(svg, css('--human'), .26, .02));
+    g.append('path').attr('d', area(D.sL, 1)).attr('fill', grad(svg, css('--loss'), .02, .26)); },
+  over:({g,x,y}) => { g.append('text').attr('class','note').attr('x',x(2034)).attr('y',y(1.21)).text('AI as a tool').style('fill',css('--human')).style('font-weight',600);
+    g.append('text').attr('class','note').attr('x',x(2031)).attr('y',y(.8)).text('AI instead of thinking').style('fill',css('--loss')).style('font-weight',600); },
+  rows:[{k:'sH',n:'augmented',c:'--human',f:v=>v.toFixed(2)},{k:'s',n:'average',c:'--ink3',f:v=>v.toFixed(2)},{k:'sL',n:'substituted',c:'--loss',f:v=>v.toFixed(2)}]});
+
+/* ---------- Figure 5: remedy ---------- */
+timeChart('c5', {h:340, y:[5,36], yt:[10,20,30], yfmt:v=>v+'%',
+  series:[{k:'pToday',c:'--loss',w:3.4,label:'AI used as today',pill:'29%',end:1},{k:'pTutor',c:'--human',w:3.4,label:'AI as a tutor',pill:'10%',end:1}],
+  under:({g,svg,area,y,x,iw}) => { g.append('path').attr('d', area(D.pToday, D.pTutor)).attr('fill', grad(svg, css('--human'), .05, .28, false));
+    },
+  over:({g,x,y}) => { const a = D.pToday.at(-1), b = D.pTutor.at(-1), xx = x(2047.6);
+    g.append('path').attr('d', `M${xx-6},${y(a)+8}H${xx}V${y(b)-8}H${xx-6}`).attr('fill','none').attr('stroke',css('--ink')).attr('stroke-width',1.4);
+    pill(g, xx-14, y((a+b)/2), `${Math.round(a-b)} points saved`, css('--ink'), 'end'); },
+  rows:[{k:'pToday',n:'as today',c:'--loss',f:v=>v.toFixed(1)+'%'},{k:'pTutor',n:'as a tutor',c:'--human',f:v=>v.toFixed(1)+'%'}]});
+
+/* ---------- Figure 6: sales frieze ---------- */
+{ const h = 330, svg = svgIn('c6', h); svg.append('defs');
+  const n = 6, x0 = 6, segW = (W - 60) / n, cy = 160, notch = 24, gap = 6;
+  const F = [['Research prospects','and build lead lists','done'],['First emails','and follow-ups','done'],['Qualify leads','on the phone','now'],['Quotes, discounts','and renewals','next'],['Manage an','account over time','next'],['Negotiate a','complex deal','human']];
+  const G = {done:[css('--ai2'),css('--ai')], now:[css('--loss2'),css('--loss')], next:[css('--junior2'),css('--junior')], human:[css('--human2'),css('--human')]};
+  const T = {done:css('--ink'), now:'#fff', next:'#2b2410', human:'#fff'};
+  const half = i => 92 - 40*i/n;
+  F.forEach(([a,b,st],i) => {
+    const id = 'sg'+(uid++), lg = svg.select('defs').append('linearGradient').attr('id',id).attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',1);
+    lg.append('stop').attr('offset','0%').attr('stop-color',G[st][1]); lg.append('stop').attr('offset','100%').attr('stop-color',G[st][1]);
+    const xa = x0 + i*segW + gap/2, xb = x0 + (i+1)*segW - gap/2, ha = half(i), hb = half(i+1), tipW = i===n-1 ? 44 : notch;
+    const pts = [[xa,cy-ha],[xb,cy-hb],[xb+tipW,cy],[xb,cy+hb],[xa,cy+ha]]; if (i) pts.push([xa+notch,cy]);
+    svg.append('path').attr('d', d3.line()(pts)+'Z').attr('fill',`url(#${id})`).attr('stroke',`url(#${id})`).attr('stroke-width',4).attr('stroke-linejoin','round');
+    const tx = (xa+xb)/2 + (i ? notch/2 - 4 : 0);
+    svg.append('text').attr('x',tx).attr('y',cy-26).attr('text-anchor','middle').attr('class','ax').style('fill',T[st]).style('opacity',.75).text(String(i+1).padStart(2,'0'));
+    const t = svg.append('text').attr('x',tx).attr('y',cy+2).attr('text-anchor','middle').style('fill',T[st]).style('font-size','12.5px').style('font-weight',600);
+    t.append('tspan').text(a); t.append('tspan').attr('x',tx).attr('dy',17).style('font-weight',400).text(b);
+  });
+  svg.append('text').attr('class','ax').attr('x',x0).attr('y',30).text('BASE · where juniors learn');
+  svg.append('text').attr('class','ax').attr('x',W-12).attr('y',30).attr('text-anchor','end').text('TOP · where seniors decide');
+  const xt = x0 + 2*segW;
+  svg.append('line').attr('x1',xt).attr('x2',xt).attr('y1',58).attr('y2',262).attr('stroke',css('--ink')).attr('stroke-width',1.4).attr('stroke-dasharray','4 4');
+  pill(svg, xt, 50, 'today', css('--ink'), 'middle');
+  const ty = 288; [[0,2,'done by AI agents','--aiInk'],[2,3,'being automated','--loss'],[3,5,'next in line','--juniorInk'],[5,6,'still human','--human']].forEach(([a,b,l,c],k) => {
+    const xa = x0 + a*segW + 10, xb = x0 + b*segW - 10;
+    svg.append('line').attr('x1',xa).attr('x2',xb).attr('y1',ty).attr('y2',ty).attr('stroke',css(k===2?'--junior':c)).attr('stroke-width',4).attr('stroke-linecap','round');
+    svg.append('text').attr('x',(xa+xb)/2).attr('y',ty+22).attr('text-anchor','middle').style('font-size','12.5px').style('font-weight',600).style('fill',css(c)).text(l); });
+}
+
+/* ---------- Figure 7: cost of delay ---------- */
+timeChart('c7', {h:400, m:{t:70,r:24,b:34,l:12}, y:[.3,1.02], yt:[.4,.6,.8,1], yfmt:v=>v===1?'1 = 2026':v,
+  series:[{k:'Yr',c:'--ink',w:3}],
+  under:({g,svg,x,y,iw}) => { const cols = [.22,.45,.7,.95];
+    const yi = tt => { const j = Math.min(D.t.length-2, Math.floor((tt-2026)*2)); const f = (tt-D.t[j])*2; return D.Yr[j]*(1-f) + D.Yr[j+1]*f; };
+    D.delays.forEach((d,k) => { const t0 = k ? D.delays[k-1].tp : 2026, a = cols[k];
+      const ids = D.t.map((t,i)=>i).filter(i => D.t[i] > t0 + 1e-9 && D.t[i] < d.tp - 1e-9);
+      const pts = [[t0, yi(t0)], ...ids.map(i=>[D.t[i], D.Yr[i]]), [d.tp, yi(d.tp)]];
+      g.append('path').attr('d', d3.area().x(q=>x(q[0])).y0(q=>y(q[1])).y1(y(1)).curve(d3.curveMonotoneX)(pts))
+       .attr('fill', grad(svg, css('--loss'), a/.6, a/.6)).attr('stroke', css('--plate')).attr('stroke-width', 2); });
+    D.delays.forEach(d => { const xx = x(d.tp), i = Math.min(D.t.length-1, Math.round((d.tp-2026)*2));
+      g.append('line').attr('x1',xx).attr('x2',xx).attr('y1',y(1)-34).attr('y2',y(D.Yr[Math.min(i,D.t.length-1)])).attr('stroke',css('--ink3')).attr('stroke-width',1);
+      pill(g, xx, y(1)-46, `${d.lost.toFixed(1)} years lost`, css('--loss'), 'middle');
+      g.append('text').attr('x',xx).attr('y',y(1)-64).attr('text-anchor','middle').attr('class','note').style('font-weight',600).style('fill',css('--ink')).text(d.d===0?'no delay':`${d.d}-year delay`); }); },
+  over:({g,x,y}) => g.append('text').attr('class','note').attr('x',x(2047.4)).attr('y',y(.48)).attr('text-anchor','middle').text('output sold'),
+  rows:[{k:'Yr',n:'output sold',c:'--ink',f:v=>v.toFixed(2)}]});
+}
+draw();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+new MutationObserver(draw).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+</script>
